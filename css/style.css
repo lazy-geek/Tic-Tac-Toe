@@ -1,0 +1,74 @@
+body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.board{
+    display: grid;
+    height: 500px;
+    width: 500px;
+    background-color: #efefef;
+    grid-template-columns:  repeat(3,1fr);
+    grid-template-rows:  repeat(3,1fr);
+    gap: 10px;
+    padding: 20px;
+    border-radius: 1%;
+}
+
+.board .board__tile {
+    background-color: wheat;
+    border-radius: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+}
+
+.player1 {
+    background-color:black !important;
+}
+
+.player2 {
+    background-color: coral !important;
+}
+
+.x{
+    position: relative;
+    /* height: 100px; 
+    width: 100px;   */
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.x::before,
+.x::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 4px; 
+    background-color: #43434d;
+    border-radius: 50%;
+}
+
+.x::before {
+    transform: rotate(45deg);
+}
+
+.x::after {
+    transform: rotate(-45deg);
+}
+
+.o {
+    position: relative;
+    /* height: 100px;
+    width: 100px; */
+    height: 100%;
+    width: 100%;
+    border: 4px solid #43434d;
+    border-radius: 50%;
+}
