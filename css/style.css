@@ -25,15 +25,8 @@ body {
     padding: 2px;
 }
 
-.player1 {
-    background-color:black !important;
-}
 
-.player2 {
-    background-color: coral !important;
-}
-
-.x{
+.player1{
     position: relative;
     /* height: 100px; 
     width: 100px;   */
@@ -43,8 +36,8 @@ body {
     flex-direction: column;
     justify-content: center;
 }
-.x::before,
-.x::after {
+.player1::before,
+.player1::after {
     position: absolute;
     content: '';
     width: 100%;
@@ -53,15 +46,15 @@ body {
     border-radius: 50%;
 }
 
-.x::before {
+.player1::before {
     transform: rotate(45deg);
 }
 
-.x::after {
+.player1::after {
     transform: rotate(-45deg);
 }
 
-.o {
+.player2 {
     position: relative;
     /* height: 100px;
     width: 100px; */

@@ -8,9 +8,9 @@ class Board {
         this.currentPlayer = 1;
         this.setupBoardGrid();
         this.init();
-        this.maxMoves= size * size;
+        this.maxMoves = size * size;
         this.currentMoves = 0;
-       
+
     }
 
     createTile() {
@@ -34,11 +34,8 @@ class Board {
 
     createMarker(elemName) {
         const elem = document.createElement('div');
-        if (elemName == 'x') {
-            elem.classList.add('x');
-        } else {
-            elem.classList.add('o')
-        }
+
+        elem.classList.add(elemName);
 
         return elem;
     }
@@ -60,14 +57,14 @@ class Board {
         this.setupEventListeners();
 
     }
-    resetGame(){
+    resetGame() {
         this.currentMoves = 0;
         this.currentPlayer = 1;
 
         for (let i = 0; i < this.size; i++) {
             for (let j = 0; j < this.size; j++) {
 
-              
+
                 this.boardTiles[i][j].elem.remove();
 
             }
@@ -75,42 +72,42 @@ class Board {
         this.init();
     }
 
-    checkGameOver(){
-        if(this.currentMoves === this.maxMoves){
+    checkGameOver() {
+        if (this.currentMoves === this.maxMoves) {
             console.log("gameOver - Draw");
             setTimeout(() => {
                 window.alert("gameOver - Draw")
-                
+
                 this.resetGame();
             }, 100);
             return;
         }
     }
-    makeMove(i,j){
+    makeMove(i, j) {
         if (this.boardTiles[i][j].state != 0) return;
-                   
+
         this.boardTiles[i][j].state = this.currentPlayer;
         this.currentMoves++;
-        this.boardTiles[i][j].elem.appendChild(this.currentPlayer == 1 ? this.createMarker('x') : this.createMarker('o'));
+        this.boardTiles[i][j].elem.appendChild(this.currentPlayer == 1 ? this.createMarker('player1') : this.createMarker('player2'));
         const winner = this.checkWinner();
-        if(winner.winner == this.currentPlayer){
+        if (winner.winner == this.currentPlayer) {
             console.log("Player - " + winner.winner + " Won");
             setTimeout(() => {
                 window.alert("Player - " + winner.winner + " Won")
-                
+
                 this.resetGame();
             }, 100);
             return;
         }
         this.checkGameOver();
-        this.boardTiles[i][j].elem.removeEventListener('click', () => {this.makeMove(i,j);});
+        this.boardTiles[i][j].elem.removeEventListener('click', () => { this.makeMove(i, j); });
 
         this.toggleTurn();
     }
     setupEventListeners() {
         for (let i = 0; i < this.size; i++) {
             for (let j = 0; j < this.size; j++) {
-                this.boardTiles[i][j].elem.addEventListener('click', () => {this.makeMove(i,j);});
+                this.boardTiles[i][j].elem.addEventListener('click', () => { this.makeMove(i, j); });
             }
 
         }
@@ -150,11 +147,11 @@ class Board {
         // check from upper left corner
         let winnerFound = true;
         for (let i = 1, j = 1; i < this.size && j < this.size; i++, j++) {
-            if (this.boardTiles[i - 1][j - 1].state !== this.boardTiles[i][j].state  || this.boardTiles[i][j].state === 0) {
+            if (this.boardTiles[i - 1][j - 1].state !== this.boardTiles[i][j].state || this.boardTiles[i][j].state === 0) {
                 winnerFound = false;
                 break;
             }
-            
+
 
         }
         if (winnerFound) {
@@ -163,18 +160,18 @@ class Board {
 
         // check from upper right corner
         winnerFound = true;
-        for (let i = 0,j = this.size -1 ; i < this.size && j > 0; i++, j--) {
-            if (this.boardTiles[i][j].state !== this.boardTiles[i+1][j-1].state || this.boardTiles[i][j].state === 0) {
+        for (let i = 0, j = this.size - 1; i < this.size && j > 0; i++, j--) {
+            if (this.boardTiles[i][j].state !== this.boardTiles[i + 1][j - 1].state || this.boardTiles[i][j].state === 0) {
                 winnerFound = false;
                 break;
             }
         }
-        
+
         if (winnerFound) {
-            return { "winner": this.boardTiles[this.size-1][0].state }
+            return { "winner": this.boardTiles[this.size - 1][0].state }
         }
 
-        return {"winner": 0};
+        return { "winner": 0 };
     }
 }
 
