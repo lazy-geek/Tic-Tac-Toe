@@ -2,7 +2,7 @@
 
 ## Preview
 
-<img src="github-assets/board.png" style="max-height:400px;"/> &#160;
+<img src="github-assets/board.PNG" width="500"/> &#160;
 
 ## TODO
 2. Add Input for user to select thier name & use them in game
