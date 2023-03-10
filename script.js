@@ -10,9 +10,18 @@ class Board {
         this.init();
         this.maxMoves = size * size;
         this.currentMoves = 0;
+        this.player1Name = "player 1";
+        this.player2Name =  "player 2";
 
     }
 
+    getPlayerName(num){
+        if(num==1){
+            return this.player1Name;
+        } else{
+            return this.player2Name;
+        }
+    }
     changeSize(size){
         document.querySelector('.board').innerHTML =""
         this.size = size;
@@ -104,9 +113,9 @@ class Board {
         this.boardTiles[i][j].elem.appendChild(this.currentPlayer == 1 ? this.createMarker('player1') : this.createMarker('player2'));
         const winner = this.checkWinner();
         if (winner.winner == this.currentPlayer) {
-            console.log("Player - " + winner.winner + " Won");
+            console.log(this.getPlayerName(winner.winner) + " Won");
             setTimeout(() => {
-                window.alert("Player - " + winner.winner + " Won")
+                window.alert(this.getPlayerName(winner.winner) + " Won")
 
                 this.resetGame();
             }, 100);
@@ -144,6 +153,7 @@ class Board {
 
         // check column by column
         for (let i = 0; i < this.size; i++) {
+
             let winnerFound = true;
             for (let j = 1; j < this.size; j++) {
                 if (this.boardTiles[j - 1][i].state !== this.boardTiles[j][i].state || this.boardTiles[j][i].state === 0) {
@@ -195,6 +205,16 @@ const form  = document.querySelector('form');
 form.addEventListener('submit',(e) => {
     e.preventDefault();
     const formData = new FormData(form);
-    console.log(formData.get('board_size'));
-    board.changeSize(formData.get('board_size'));
+    if(board.player1Name != formData.get('player1')){
+        board.player1Name = formData.get('player1');
+    }
+    if(board.player2Name != formData.get('player2')){
+        board.player2Name = formData.get('player2');
+
+    }
+    if(board.size != formData.get('board_size')){
+
+        console.log(formData.get('board_size'));
+        board.changeSize(formData.get('board_size'));
+    }
 });
