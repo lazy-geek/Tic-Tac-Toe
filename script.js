@@ -152,7 +152,7 @@ class Board {
                 }
             }
             if (winnerFound) {
-                return { "winner": this.boardTiles[i][0].state }
+                return { "winner": this.boardTiles[0][i].state }
             }
 
         }
