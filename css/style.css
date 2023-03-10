@@ -1,12 +1,16 @@
 body {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-    display: flex;
+    /* display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: center; */
+    height: 100vh;  
+
 }
 
 .board{
+    justify-self: center;
+    align-self: center;
     display: grid;
     height: 500px;
     width: 500px;
@@ -63,4 +67,41 @@ body {
     width: 100%;
     border: 4px solid #43434d;
     border-radius: 50%;
+}
+
+.main{
+    height: 100vh;  
+    display: grid;
+    gap: 10px;
+    grid-template-rows: auto auto;
+}
+
+.settings{
+    display: flex;
+    justify-content: center;
+}
+.settings form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.form_item{
+    display:flex;
+    align-items: center;
+    text-align: center
+}
+
+.settings label {
+    margin-right: 10px;
+}
+.settings input {
+    padding: 7px;
+    border: 1px solid #bcc3c9;
+    border-radius: 3px;
+    background-color: white;
+}
+
+#apply{
+    margin-top: 10px;
 }

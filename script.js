@@ -13,6 +13,19 @@ class Board {
 
     }
 
+    changeSize(size){
+        document.querySelector('.board').innerHTML =""
+        this.size = size;
+        this.boardTiles = []
+        // current turn
+        // 1 - player 1
+        // 2 - player 2
+        this.currentPlayer = 1;
+        this.setupBoardGrid();
+        this.init();
+        this.maxMoves = size * size;
+        this.currentMoves = 0;
+    }
     createTile() {
         const elem = document.createElement('div');
         elem.classList.add("board__tile");
@@ -175,4 +188,13 @@ class Board {
     }
 }
 
-const temp = new Board(3);
+
+const board =new Board(3)
+
+const form  = document.querySelector('form');
+form.addEventListener('submit',(e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    console.log(formData.get('board_size'));
+    board.changeSize(formData.get('board_size'));
+});

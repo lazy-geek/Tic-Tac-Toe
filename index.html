@@ -10,7 +10,19 @@
     <title>Tic Tac Toe</title>
 </head>
 <body>
-    <main class="board">
+    <main class="main">
+        <section class="board"></section>
+        <section class="settings">
+            <Form>
+                <div class="form_item">
+                    <label for="board_size_input">Board Size</label>
+                    <input type="number" name="board_size" id="board_size_input" placeholder="3" required value="3" min="2"/>
+                </div>
+                    <input type="submit" value="Apply" id="apply">
+
+            </Form>
+        </section>
     </main>
+    
 </body>
 </html>
