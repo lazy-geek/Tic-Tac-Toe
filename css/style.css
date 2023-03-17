@@ -114,7 +114,7 @@ body {
     background-color: white;
     position: relative;
     padding: 30px;
-    width: 500px;
+    width: min(500px,90%);
     text-align: center;
     
 }
