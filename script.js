@@ -4,6 +4,7 @@ const createPopup = function (content) {
     const popup_container = document.querySelector('.popup-container');
     // popup_close.addEventListener('click',() => {
     // });
+    const close_button = popup.innerHTML;
     popup.innerHTML += content;
 
     return {
@@ -13,7 +14,7 @@ const createPopup = function (content) {
         },
         hidePopup: function () {
             popup_container.classList.add('hidden');
-
+            popup.innerHTML = close_button;
         }
     };
 }
@@ -137,7 +138,12 @@ class Board {
             const { showPopup, hidePopup } = createPopup(`<span style='font-size: 40px; font-weight: 500'>${this.getPlayerName(winner.winner).toUpperCase()} WON !!!</span>`);
             showPopup();
             const popup_close = document.querySelector('.popup-container .popup-content .popup-close');
+            const popup_container = document.querySelector('.popup-container');
             popup_close.addEventListener('click', ()=>{
+                hidePopup();
+                this.resetGame();
+            });
+            popup_container.addEventListener('click', ()=>{
                 hidePopup();
                 this.resetGame();
             });
