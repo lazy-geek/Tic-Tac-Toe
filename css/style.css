@@ -107,6 +107,7 @@ body {
     border-radius: 5px;
     color:white;
     font-weight: 600;
+    cursor: pointer;
 } 
 
 .popup-content{
