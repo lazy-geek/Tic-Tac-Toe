@@ -1,3 +1,23 @@
+const createPopup = function (content) {
+    const popup = document.querySelector('.popup-container .popup-content');
+    // const popup_close = document.querySelector('.popup-container .popup-content .popup-close');
+    const popup_container = document.querySelector('.popup-container');
+    // popup_close.addEventListener('click',() => {
+    // });
+    popup.innerHTML += content;
+
+    return {
+        showPopup: function () {
+            popup_container.classList.remove('hidden');
+
+        },
+        hidePopup: function () {
+            popup_container.classList.add('hidden');
+
+        }
+    };
+}
+
 class Board {
     constructor(size) {
         this.size = size;
@@ -11,19 +31,19 @@ class Board {
         this.maxMoves = size * size;
         this.currentMoves = 0;
         this.player1Name = "player 1";
-        this.player2Name =  "player 2";
+        this.player2Name = "player 2";
 
     }
 
-    getPlayerName(num){
-        if(num==1){
+    getPlayerName(num) {
+        if (num == 1) {
             return this.player1Name;
-        } else{
+        } else {
             return this.player2Name;
         }
     }
-    changeSize(size){
-        document.querySelector('.board').innerHTML =""
+    changeSize(size) {
+        document.querySelector('.board').innerHTML = ""
         this.size = size;
         this.boardTiles = []
         // current turn
@@ -114,11 +134,14 @@ class Board {
         const winner = this.checkWinner();
         if (winner.winner == this.currentPlayer) {
             console.log(this.getPlayerName(winner.winner) + " Won");
-            setTimeout(() => {
-                window.alert(this.getPlayerName(winner.winner) + " Won")
-
+            const { showPopup, hidePopup } = createPopup(`<span style='font-size: 40px; font-weight: 500'>${this.getPlayerName(winner.winner).toUpperCase()} WON !!!</span>`);
+            showPopup();
+            const popup_close = document.querySelector('.popup-container .popup-content .popup-close');
+            popup_close.addEventListener('click', ()=>{
+                hidePopup();
                 this.resetGame();
-            }, 100);
+            });
+
             return;
         }
         this.checkGameOver();
@@ -199,20 +222,20 @@ class Board {
 }
 
 
-const board =new Board(3)
+const board = new Board(3)
 
-const form  = document.querySelector('form');
-form.addEventListener('submit',(e) => {
+const form = document.querySelector('form');
+form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(form);
-    if(board.player1Name != formData.get('player1')){
+    if (board.player1Name != formData.get('player1')) {
         board.player1Name = formData.get('player1');
     }
-    if(board.player2Name != formData.get('player2')){
+    if (board.player2Name != formData.get('player2')) {
         board.player2Name = formData.get('player2');
 
     }
-    if(board.size != formData.get('board_size')){
+    if (board.size != formData.get('board_size')) {
 
         console.log(formData.get('board_size'));
         board.changeSize(formData.get('board_size'));
